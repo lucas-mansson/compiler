@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-g",
+      "-c",
+      "-o",
+      "build/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/lucas/projects/compiler",
+    "file": "/home/lucas/projects/compiler/src/main.c",
+    "output": "/home/lucas/projects/compiler/build/main.o"
+  }
+]
