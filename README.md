@@ -2,11 +2,7 @@
 
 This is the code for a interpreted programming language based on the book ["Crating interpreters" by Robert Nystrom.](https://craftinginterpreters.com/). 
 
-The compiler is written in C and compiles to bytecode. The project contains an emulator/virtual machine that runs the bytecode.
-
-I try to add my own ideas and things so its not a 1:1 copy. 
-
-The language is high-level, dynamically typed, and garbage collected, supporting scripting, procedural programming and basic object oriented concepts. You can read more about the language below.
+The compiler is written in C and compiles to bytecode. The project contains a garbage collector and an emulator/virtual machine that runs the bytecode.
 
 ## Things to add:
 
