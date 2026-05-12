@@ -1,9 +1,10 @@
-# interpreter
-The code for a simple interpreted programming language I work on in my free time.
+# Compiler
 
+This is the code for a interpreted programming language based on the book ["Crating interpreters" by Robert Nystrom.](https://craftinginterpreters.com/). 
 
-This is the code for a simple interpreted programming language based on the book ["Crating interpreters" by Robert Nystrom.](https://craftinginterpreters.com/). 
-I try to add my own ideas and things so its not a 1:1 copy.
+The compiler is written in C and compiles to bytecode. The project contains an emulator/virtual machine that runs the bytecode.
+
+I try to add my own ideas and things so its not a 1:1 copy. 
 
 The language is high-level, dynamically typed, and garbage collected, supporting scripting, procedural programming and basic object oriented concepts. You can read more about the language below.
 
@@ -19,9 +20,7 @@ Features I would like that are not in the book:
 - [ ] Static type checking
 - [ ] arrays and [] operator
 - [ ] Add multi-line comments
-- [ ] Add support for leading decimal point e.g. `.123`
 - [ ] ...
-
 
 ### Standard library
 
@@ -32,7 +31,6 @@ The language has no Standard Library basically. Here are some things to add:
 - [ ] File I/O
 - [ ] Networking
 - [ ] ...
-
 
 ## Language specification
 
