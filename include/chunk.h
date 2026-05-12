@@ -1,4 +1,5 @@
-#ifndef chunk_h
+#ifndef CHUNK_H
+#define CHUNK_H
 #include "common.h"
 
 // Operation codes, controls what kind of instruction is used
