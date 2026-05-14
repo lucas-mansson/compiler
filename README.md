@@ -16,6 +16,7 @@ Features I would like that are not in the book:
 - [ ] Static type checking
 - [ ] arrays and [] operator
 - [ ] Add multi-line comments
+- [ ] LLVM integration
 - [ ] ...
 
 ### Standard library
