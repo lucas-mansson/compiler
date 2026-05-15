@@ -4,7 +4,7 @@ SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=build/%.o)
 TARGET = build/main
 
-.PHONY: all clean run
+.PHONY: all clean run test
 
 all: $(TARGET)
 
@@ -20,3 +20,6 @@ build/%.o: src/%.c
 
 clean:
 	rm -rf build/
+
+test: $(TARGET)
+	./test/test.sh $(TARGET)
