@@ -1,19 +1,33 @@
 #ifndef CHUNK_H
 #define CHUNK_H
 #include "common.h"
+#include "pair.h"
 #include "value.h"
+//
+// Keep track of line
+typedef struct {
+    int count;
+    int line;
+} line_info;
 
-// Operation codes, controls what kind of instruction is used
+// Operation codes, what kind of instruction is used
 typedef enum {
     OP_CONSTANT,
     OP_RETURN,
 } op_code;
 
 typedef struct {
+    // Opcodes - dynamic array
+    uint8_t* code;
     int count;
     int capacity;
-    uint8_t* code; // Opcodes
-    int* lines;    // For error messages
+
+    // Stores pairs [(count1, line1), (count2, line2)]
+    // e.g (3, 2) means 3 instructions are on line 2
+    line_info* lines;
+    int lines_count;
+    int lines_capacity;
+
     value_array constants;
 } chunk;
 
@@ -24,5 +38,8 @@ void write_chunk(chunk* chunk, uint8_t byte, int line);
 void free_chunk(chunk* chunk);
 
 int add_constant(chunk* chunk, value val);
+
+// From an instructions index, get the current oine
+int get_line(chunk* chunk, int instruction_index);
 
 #endif
