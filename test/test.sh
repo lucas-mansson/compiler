@@ -11,7 +11,7 @@ for f in test/data/*.in; do
     # Check if files actually exist (handles cases where glob finds nothing)
     [ -e "$f" ] || continue
 
-    echo "Testing $f..."
+    echo "Testing $f"
     pre=${f%.in}
     out=$pre.out
     ans=$pre.expected
@@ -22,9 +22,9 @@ for f in test/data/*.in; do
     DIFF=$(diff -w $ans $out)
     if [ "$DIFF" == "" ]
     then 
-        echo "Correct!"
+        echo "Passed!"
     else
-        echo "$f Incorrect!"
+        echo "$f Failed!"
         exit 1
     fi
 done
