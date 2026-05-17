@@ -1,7 +1,5 @@
 # Compiler
 
-This is the code for a interpreted programming language based on the book ["Crating interpreters" by Robert Nystrom.](https://craftinginterpreters.com/). 
-
 The compiler is written in C and compiles to bytecode. The project contains a garbage collector and an emulator/virtual machine that runs the bytecode.
 
 ## Things to add:
