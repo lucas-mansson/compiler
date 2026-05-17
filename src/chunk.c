@@ -1,6 +1,5 @@
 #include "chunk.h"
 #include "memory.h"
-#include "pair.h"
 #include "value.h"
 #include <stdlib.h>
 
