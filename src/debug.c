@@ -14,8 +14,9 @@ static int constant_instruction(const char* name, chunk* chunk, int offset)
     uint8_t constant = chunk->code[offset + 1];
     printf("%-16s %4d '", name, constant);
     print_value(chunk->constants.values[constant]);
-    printf("\n");
-    return offset + 2;
+    printf("'\n");
+    return offset + 2; // Two since constant instruction has one for opcode and
+                       // one for operand
 }
 
 void disassemble_chunk(chunk* chunk, const char* name)
@@ -29,6 +30,15 @@ void disassemble_chunk(chunk* chunk, const char* name)
 int disassemble_instruction(chunk* chunk, int offset)
 {
     printf("%04d ", offset);
+
+    if (offset > 0 && chunk->lines[offset] == chunk->lines[offset - 1]) {
+        // Print a | if the instruction came from the same line as the previous
+        // instruction for debugging purposes
+        printf("   | ");
+    } else {
+        printf("%4d ", chunk->lines[offset]);
+    }
+
     uint8_t instruction = chunk->code[offset];
     switch (instruction) {
     case OP_CONSTANT:

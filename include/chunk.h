@@ -9,17 +9,17 @@ typedef enum {
     OP_RETURN,
 } op_code;
 
-// dynamic array
 typedef struct {
     int count;
     int capacity;
-    uint8_t* code;
+    uint8_t* code; // Opcodes
+    int* lines;    // For error messages
     value_array constants;
 } chunk;
 
 void init_chunk(chunk* chunk);
 
-void write_chunk(chunk* chunk, uint8_t byte);
+void write_chunk(chunk* chunk, uint8_t byte, int line);
 
 void free_chunk(chunk* chunk);
 

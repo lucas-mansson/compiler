@@ -8,24 +8,29 @@ void init_chunk(chunk* chunk)
     chunk->count = 0;
     chunk->capacity = 0;
     chunk->code = NULL;
+    chunk->lines = NULL;
     init_value_array(&chunk->constants);
 }
 
-void write_chunk(chunk* chunk, uint8_t byte)
+void write_chunk(chunk* chunk, uint8_t byte, int line)
 {
     if (chunk->capacity == chunk->count) {
         int old_capacity = chunk->capacity;
         chunk->capacity = GROW_CAPACITY(old_capacity);
         chunk->code =
             GROW_ARRAY(uint8_t, chunk->code, old_capacity, chunk->capacity);
+        chunk->lines =
+            GROW_ARRAY(int, chunk->lines, old_capacity, chunk->capacity);
     }
     chunk->code[chunk->count] = byte;
+    chunk->lines[chunk->count] = line;
     chunk->count++;
 }
 
 void free_chunk(chunk* chunk)
 {
     FREE_ARRAY(uint8_t, chunk->code, chunk->capacity);
+    FREE_ARRAY(int, chunk->lines, chunk->capacity);
     free_value_array(&chunk->constants);
 }
 
