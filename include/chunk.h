@@ -12,6 +12,7 @@ typedef struct {
 // Operation codes, what kind of instruction is used
 typedef enum {
     OP_CONSTANT,
+    OP_NEGATE,
     OP_RETURN,
 } op_code;
 

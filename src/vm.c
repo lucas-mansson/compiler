@@ -15,7 +15,7 @@ void free_vm(void) {}
 
 void push(value val)
 {
-    *vm.stack_top++ = val;
+    *vm.stack_top = val;
     vm.stack_top++;
 }
 
@@ -49,6 +49,11 @@ static interpret_result run(void)
         case OP_CONSTANT: {
             value constant = READ_CONSTANT();
             push(constant);
+            break;
+        }
+
+        case OP_NEGATE: {
+            push(-pop());
             break;
         }
 
