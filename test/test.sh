@@ -7,7 +7,7 @@ if [ -z "$BINARY" ]; then
     exit 1
 fi
 
-for f in test/data/*.in; do
+for f in test/data/**/*.in; do
     # Check if files actually exist (handles cases where glob finds nothing)
     [ -e "$f" ] || continue
 
