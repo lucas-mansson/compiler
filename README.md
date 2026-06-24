@@ -4,7 +4,7 @@ The compiler is written in C and compiles to bytecode. The project contains a ga
 
 ## Things to add:
 
-Features I would like that are not in the book:
+Features I would like:
 
 - [ ] Differentiate integer and floating point numbers
 - [ ] Ternary operator
