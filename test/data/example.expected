@@ -1,3 +1,0 @@
-== test ==
-0000  123 OP_CONSTANT         0 '1.2'
-0002    | OP_RETURN
