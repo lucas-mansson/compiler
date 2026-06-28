@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Iinclude -Wall -Wextra -Wpedantic -g
+CFLAGS = -g -Iinclude -Wall -Wextra -Wpedantic -g
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=build/%.o)
 TARGET = build/main
@@ -23,3 +23,6 @@ clean:
 
 test: $(TARGET)
 	./test/test.sh $(TARGET)
+
+check: $(TARGET)
+	valgrind --leak-check=full $(TARGET)
