@@ -10,8 +10,10 @@
 typedef struct {
     chunk* chunk;
     uint8_t* ip; // instruction pointer, points to next code to be executed
-    value stack[STACK_MAX]; // instruction stack
-    value* stack_top;       // one past the top element in the stack
+    value* stack;
+    value* stack_top; // one past the top element in the stack
+    size_t capacity;
+    size_t size;
 } virtual_machine;
 
 typedef enum {
@@ -20,12 +22,12 @@ typedef enum {
     INTERPRET_RUNTIME_ERROR
 } interpret_result;
 
-void init_vm(void);
-void free_vm(void);
+void init_vm(virtual_machine* vm);
+void free_vm(virtual_machine* vm);
 
-interpret_result interpret(chunk* chunk);
+interpret_result interpret(virtual_machine* vm, chunk* chunk);
 
-void push(value val);
-value pop(void);
+void push(virtual_machine* vm, value val);
+value pop(virtual_machine* vm);
 
 #endif
