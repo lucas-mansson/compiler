@@ -32,8 +32,7 @@ int disassemble_instruction(chunk* chunk, int offset)
 {
     printf("%04d ", offset);
 
-    if (offset > 0 &&
-        chunk->lines[offset].line == chunk->lines[offset - 1].line) {
+    if (offset > 0 && get_line(chunk, offset) == get_line(chunk, offset - 1)) {
         // Print a | if the instruction came from the same line as the previous
         // instruction for debugging purposes
         printf("   | ");

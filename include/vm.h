@@ -23,11 +23,13 @@ typedef enum {
 } interpret_result;
 
 void init_vm(virtual_machine* vm);
+
 void free_vm(virtual_machine* vm);
 
 interpret_result interpret(virtual_machine* vm, chunk* chunk);
 
 void push(virtual_machine* vm, value val);
+
 value pop(virtual_machine* vm);
 
 #endif

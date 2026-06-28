@@ -43,7 +43,7 @@ void free_chunk(chunk* chunk);
 
 int add_constant(chunk* chunk, value val);
 
-// From an instructions index, get the current oine
+// From an instructions index, get the current line
 int get_line(chunk* chunk, int instruction_index);
 
 #endif

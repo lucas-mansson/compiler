@@ -9,7 +9,7 @@ void init_chunk(chunk* chunk)
     chunk->count = 0;
     chunk->capacity = 0;
 
-    chunk->lines = NULL;
+    chunk->lines = malloc(sizeof(line_info));
     chunk->lines_count = 0;
     chunk->lines_capacity = 0;
 
