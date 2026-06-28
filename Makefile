@@ -8,15 +8,15 @@ TARGET = build/main
 
 all: $(TARGET)
 
-run: $(TARGET)
+build/%.o: src/%.c
+	mkdir -p build
+	$(CC) $(CFLAGS) -c $< -o $@
+
+run: build $(TARGET)
 	@./$(TARGET) $(ARGS)
 
 $(TARGET): $(OBJ)
 	$(CC) $(OBJ) -o $(TARGET)
-
-build/%.o: src/%.c
-	mkdir -p build
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf build/
@@ -24,5 +24,5 @@ clean:
 test: $(TARGET)
 	./test/test.sh $(TARGET)
 
-check: $(TARGET)
-	valgrind --leak-check=full $(TARGET)
+check: build $(TARGET)
+	valgrind $(TARGET)
