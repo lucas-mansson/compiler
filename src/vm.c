@@ -79,7 +79,7 @@ static interpret_result run(void)
             break;
 
         case OP_NEGATE:
-            push(-pop());
+            *vm.stack_top = -(*vm.stack_top);
             break;
 
         case OP_RETURN:
