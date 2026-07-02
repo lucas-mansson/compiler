@@ -26,7 +26,7 @@ void init_vm(virtual_machine* vm);
 
 void free_vm(virtual_machine* vm);
 
-interpret_result interpret(virtual_machine* vm, chunk* chunk);
+interpret_result interpret(virtual_machine* vm, const char* source);
 
 void push(virtual_machine* vm, value val);
 

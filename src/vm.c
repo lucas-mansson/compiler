@@ -124,9 +124,8 @@ static interpret_result run(virtual_machine* vm)
 #undef BINARY_OP
 }
 
-interpret_result interpret(virtual_machine* vm, chunk* chunk)
+interpret_result interpret(virtual_machine* vm, const char* source)
 {
-    vm->chunk = chunk;
-    vm->ip = vm->chunk->code;
-    return run(vm);
+    compile(source);
+    return INTERPRET_OK;
 }
