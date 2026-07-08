@@ -15,6 +15,7 @@ Features I would like:
 - [ ] arrays and [] operator
 - [ ] Add multi-line comments
 - [ ] LLVM integration
+- [ ] String interpolation
 - [ ] ...
 
 ### Standard library
@@ -36,7 +37,7 @@ The language has no Standard Library basically. Here are some things to add:
 - Strings
 - null
 
-### Grammar
+### Grammar (outdated)
 ```
 **Statements**
 
@@ -88,57 +89,5 @@ primary     -> NUMBER
                | "null" 
                | "(" expression ")" 
                | ID ;
-```
-
-### Tokens
-
-The language has the following tokens:
-```c
-    // Single character tokens
-    LPAREN, // "("
-    RPAREN, // ")"
-    LBRACE, // "{"
-    RBRACE, // "}"
-    COMMA, // ","
-    DOT, // "."
-    MINUS, // "-"
-    PLUS, // "+"
-    SEMICOL, // ";"
-    SLASH, // "/"
-    STAR, // "*"
-    COLON, // ":"
-
-    // Comparison operators
-    BANG, // "!"
-    BANG_EQ, // "!="
-    EQ, // "="
-    EQ_EQ, // "=="
-    GT, // ">"
-    GE, // ">="
-    LT, // "<"
-    LE, // "<="
-    AND, // "&&"
-    OR, // "||"
-
-    // Literals
-    ID,
-    STRING,
-    NUMBER,
-
-    // Keywords
-    VAR, // "var"
-    IF, // "if"
-    ELSE, // "else"
-    FOR, // "for"
-    WHILE, // "while"
-    FALSE, // "false"
-    TRUE, // "true"
-    FUN, // "fun"
-    RETURN, // "return"
-    NULL, // "null"
-    CLASS, // "class"
-    THIS, // "this"
-    SUPER, // "super"
-    PRINT, // "print"
 ```
 
