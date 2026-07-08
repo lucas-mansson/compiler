@@ -41,6 +41,11 @@ static token error_token(const char* msg)
 
 static bool is_digit(const char c) { return c >= '0' && c <= '9'; }
 
+static bool is_alpha(const char c)
+{
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
 static bool is_at_end(void) { return *scan.curr == '\0'; }
 
 static char advance(void) { return *scan.curr++; }
@@ -85,12 +90,11 @@ static void skip_whitespace(void)
 
             // comments
         case '/':
-            char next = peek_next();
-            if (next == '/') {
+            if (peek_next() == '/') {
                 while (peek() != '\n' && !is_at_end()) {
                     advance();
                 }
-            } else if (next == '*') { // multi-line comment
+            } else if (peek_next() == '*') { // multi-line comment
                 while (!is_at_end()) {
                     advance();
 
@@ -104,15 +108,9 @@ static void skip_whitespace(void)
                         return;
                     }
                 }
-
-                if (is_at_end()) {
-                    return;
-                }
-
-            } else {
                 return;
             }
-
+            return;
         default:
             return;
         }
@@ -154,8 +152,85 @@ static token number(void)
     return make_token(TOKEN_NUMBER);
 }
 
+static token_type check_keyword(int start, int length, const char* remaining,
+                                token_type expected_token)
+{
+    // If the checked token and the expected token are the same length and the
+    // memory is the same, then we have the expected token
+    if ((scan.curr - scan.start == start + length) &&
+        memcmp(scan.start + start, remaining, length) == 0) {
+        return expected_token;
+    }
+
+    return TOKEN_IDENTIFIER;
+}
+
+static token_type identifier_type(void)
+{
+    // check if keyword or identifier
+    switch (*scan.start) {
+    case 'a':
+        return check_keyword(1, 2, "nd", TOKEN_AND); // and
+    case 'c':
+        return check_keyword(1, 4, "lass", TOKEN_CLASS); // class
+    case 'e':
+        return check_keyword(1, 3, "lse", TOKEN_ELSE); // else
+    case 'f':
+        if (scan.curr - scan.start > 1) {
+            char next = *(scan.curr + 1);
+            switch (next) {
+            case 'a':
+                return check_keyword(2, 3, "lse", TOKEN_FALSE); // false
+            case 'o':
+                return check_keyword(2, 1, "r", TOKEN_FOR); // for
+            case 'u':
+                return check_keyword(2, 1, "n", TOKEN_FALSE); // fun
+            }
+        }
+        break;
+    case 'i':
+        return check_keyword(1, 1, "f", TOKEN_IF); // if
+    case 'n':
+        return check_keyword(1, 2, "il", TOKEN_NIL); // nil
+    case 'o':
+        return check_keyword(1, 1, "r", TOKEN_OR); // or
+    case 'p':
+        return check_keyword(1, 4, "rint", TOKEN_PRINT); // print
+    case 'r':
+        return check_keyword(1, 5, "eturn", TOKEN_RETURN); // return
+    case 's':
+        return check_keyword(1, 4, "uper", TOKEN_SUPER); // super
+    case 't':
+        if (scan.curr - scan.start > 1) {
+            char next = *(scan.curr + 1);
+            switch (next) {
+            case 'r':
+                return check_keyword(2, 2, "ue", TOKEN_TRUE); // true
+            case 'h':
+                return check_keyword(2, 2, "is", TOKEN_THIS); // this
+            }
+        }
+        break;
+    case 'v':
+        return check_keyword(1, 2, "ar", TOKEN_VAR); // var
+    case 'w':
+        return check_keyword(1, 4, "hile", TOKEN_WHILE); // while
+    }
+
+    return TOKEN_IDENTIFIER;
+}
+
+static token identifier(void)
+{
+    while (is_alpha(peek()) || is_digit(peek()) || peek() == '_') {
+        advance();
+    }
+    return make_token(identifier_type());
+}
+
 token scan_token(void)
 {
+    skip_whitespace();
     scan.start = scan.curr;
     if (is_at_end()) {
         return make_token(TOKEN_EOF);
@@ -164,6 +239,9 @@ token scan_token(void)
     char c = advance();
 
     switch (c) {
+        if (is_alpha(c)) {
+            return identifier();
+        }
         if (is_digit(c)) {
             return number();
         }
