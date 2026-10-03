@@ -1,6 +1,7 @@
 
 #include "scanner.hpp"
 #include "token.hpp"
+#include <cassert>
 #include <cctype>
 #include <optional>
 #include <print>
@@ -26,7 +27,7 @@ std::vector<Token> Scanner::getTokens()
             }
 
             if (is_numeric(c)) {
-                add_integer(INTEGER_LITERAL, c);
+                number();
                 break;
             }
             std::println("Error: unexpected character {}", c);
@@ -36,6 +37,21 @@ std::vector<Token> Scanner::getTokens()
     }
 
     return tokens;
+}
+
+void Scanner::number()
+{
+    size_t start = position;
+    while (!is_at_eof() && is_numeric(peek())) {
+        position++;
+    }
+    add_integer(INTEGER_LITERAL, source.substr(start, position + 1 - start));
+}
+
+char Scanner::peek()
+{
+    assert(position < source.size() - 1);
+    return source[position + 1];
 }
 
 void Scanner::add_token(TokenType token_type, char c)
@@ -49,16 +65,21 @@ void Scanner::add_token(TokenType token_type, char c)
     tokens.push_back(token);
 }
 
-void Scanner::add_integer(TokenType token_type, char c)
+void Scanner::add_integer(TokenType token_type, std::string str)
 {
-    std::string lexeme(1, c);
-
-    int value = c - '0';
+    assert(token_type == INTEGER_LITERAL);
+    int num;
+    try {
+        num = std::stoi(str);
+    } catch (const std::exception& e) {
+        std::print("Error: Tried to convert string '{}' to a number", str);
+        exit(1);
+    }
 
     Token token = {
         .type = token_type,
-        .lexeme = lexeme,
-        .value = value,
+        .lexeme = str,
+        .value = num,
     };
     tokens.push_back(token);
 }

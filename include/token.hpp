@@ -14,3 +14,5 @@ struct Token {
     std::string lexeme;
     std::optional<int> value;
 };
+
+std::string token_to_string(Token token);

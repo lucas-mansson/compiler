@@ -1,4 +1,5 @@
 #include "scanner.hpp"
+#include "token.hpp"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -28,6 +29,7 @@ int main(int argc, char* argv[])
     std::vector<Token> tokens = scanner.getTokens();
 
     for (auto t : tokens) {
-        std::print("{}", t.lexeme);
+        std::print("{} ", token_to_string(t));
     }
+    std::println();
 }
