@@ -1,3 +1,4 @@
+#include "scanner.hpp"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -23,5 +24,10 @@ int main(int argc, char* argv[])
 
     std::string source = buffer.str();
 
-    std::println("{}", source);
+    Scanner scanner(source);
+    std::vector<Token> tokens = scanner.getTokens();
+
+    for (auto t : tokens) {
+        std::print("{}", t.lexeme);
+    }
 }
