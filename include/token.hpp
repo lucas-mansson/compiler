@@ -7,6 +7,7 @@ enum TokenType {
     INTEGER_LITERAL,
     PLUS,
     SEMICOLON,
+    EOF_TOKEN,
 };
 
 struct Token {

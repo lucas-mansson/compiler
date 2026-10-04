@@ -12,6 +12,8 @@ std::string token_to_string(Token token)
         return "PLUS(+)";
     case SEMICOLON:
         return "SEMICOLON(;)";
+    case EOF_TOKEN:
+        return "EOF";
     default:
         std::println(
             "Error converting token type to string: Unknown token type");

@@ -36,6 +36,12 @@ std::vector<Token> Scanner::getTokens()
         position++;
     }
 
+    Token eof_token = {
+        .type = EOF_TOKEN,
+        .lexeme = "",
+        .value = std::nullopt,
+    };
+    tokens.push_back(eof_token);
     return tokens;
 }
 
